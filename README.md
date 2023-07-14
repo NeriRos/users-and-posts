@@ -17,8 +17,9 @@ You're about to work on a task that encompasses 4 main components:
 **External Data Source**
 
 This is an external API that's the source of user and post data. These are it’s endpoints
-users: https://jsonplaceholder.typicode.com/users
-posts: ://jsonplaceholder.typicode.com/posts?userId={userId}
+
+- users: https://jsonplaceholder.typicode.com/users
+- posts: https://jsonplaceholder.typicode.com/posts?userId={userId}
 
 **Database**
 
