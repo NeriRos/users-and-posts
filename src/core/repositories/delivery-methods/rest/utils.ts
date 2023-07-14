@@ -1,6 +1,6 @@
-type QueryParams = { [key: string]: string | number }
+export type QueryParameters = { [key: string]: string | number }
 
-export const formatUrl = (url: string, queryParams?: QueryParams) => {
+export const formatUrl = (url: string, queryParameters?: QueryParameters) => {
     let formattedUrl = url;
 
     if (formattedUrl.startsWith('/')) {
@@ -9,9 +9,9 @@ export const formatUrl = (url: string, queryParams?: QueryParams) => {
         formattedUrl = process.env.NEXT_PUBLIC_API_URL + '/' + formattedUrl;
     }
 
-    if (queryParams) {
-        const query = Object.keys(queryParams)
-            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(queryParams[k]));
+    if (queryParameters) {
+        const query = Object.keys(queryParameters)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(queryParameters[k]));
 
         formattedUrl += '?' + query.join('&');
     }
