@@ -1,23 +1,37 @@
-import {getUsersFromApi} from "@/features/users/repositories/UsersApiRepository";
+import {IUsersApiRepository} from "@/features/users/repositories/UsersApiRepository";
 
-export const getAllUsers = async () => {
-    let users: any[] = [];
+export interface IUsersService {
+    getAllUsers: () => Promise<any[]>;
+}
 
-    try {
-        // TODO: implement get from db
-    } catch (e) {
-        console.error("Getting users from DB failed", e)
-    }
+export type UsersServiceDependencies = {
+    apiRepository: IUsersApiRepository;
+}
 
-    if (users.length > 0) {
+export const UsersService = (dependencies: UsersServiceDependencies) => {
+    const getAllUsers = async () => {
+        let users: any[] = [];
+
+        try {
+            // TODO: implement get from db
+        } catch (e) {
+            console.error("Getting users from DB failed", e)
+        }
+
+        if (users.length > 0) {
+            return users;
+        }
+
+        try {
+            users = await dependencies.apiRepository.getUsersFromApi();
+        } catch (e) {
+            console.error("Getting users from API failed", e)
+        }
+
         return users;
     }
 
-    try {
-        users = await getUsersFromApi();
-    } catch (e) {
-        console.error("Getting users from API failed", e)
+    return {
+        getAllUsers
     }
-
-    return users;
 }

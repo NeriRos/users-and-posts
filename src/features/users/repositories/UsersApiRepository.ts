@@ -2,7 +2,17 @@ import {restGetRequest} from "@/core/repositories/delivery-methods/rest/GetReque
 import {ApiUser} from "@/features/users/models/ApiUser";
 import {API_BASE_URL} from "@/features/users/repositories/consts";
 
-
-export const getUsersFromApi = (): Promise<ApiUser[]> => {
-    return restGetRequest(API_BASE_URL);
+export interface IUsersApiRepository {
+    getUsersFromApi: () => Promise<ApiUser[]>;
 }
+
+export const UsersApiRepository = () => {
+    const getUsersFromApi = (): Promise<ApiUser[]> => {
+        return restGetRequest(API_BASE_URL);
+    }
+
+    return {
+        getUsersFromApi
+    }
+}
+
