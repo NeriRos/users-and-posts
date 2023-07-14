@@ -8,7 +8,7 @@ describe('UsersApiRepository', () => {
     })
 
     it('should return users from api', async () => {
-        const users = await repositoryInstance.getUsersFromApi();
+        const users = await repositoryInstance.getUsers();
 
         expect(users?.length).toBeGreaterThan(0);
     });

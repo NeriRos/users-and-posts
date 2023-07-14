@@ -3,16 +3,16 @@ import {ApiUser} from "@/features/users/models/ApiUser";
 import {API_BASE_URL} from "@/features/users/repositories/consts";
 
 export interface IUsersApiRepository {
-    getUsersFromApi: () => Promise<ApiUser[]>;
+    getUsers: () => Promise<ApiUser[]>;
 }
 
 export const UsersApiRepository = () => {
-    const getUsersFromApi = (): Promise<ApiUser[]> => {
+    const getUsers = (): Promise<ApiUser[]> => {
         return restGetRequest(API_BASE_URL);
     }
 
     return {
-        getUsersFromApi
+        getUsers
     }
 }
 
