@@ -1,5 +1,5 @@
-import {restRequest, RestRequestParams} from "@/core/repositories/delivery-methods/rest/RestDelivery";
+import {restRequest, RestRequestOptions} from "@/core/repositories/delivery-methods/rest/RestDelivery";
 
-export const restGetRequest = (url: string, options?: RestRequestParams) => {
+export const restGetRequest = (url: string, options?: RestRequestOptions) => {
     return restRequest(url, 'GET', options);
 };

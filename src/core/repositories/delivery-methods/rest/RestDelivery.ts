@@ -1,26 +1,27 @@
 import axios from 'axios';
 import {ApiConnectionError} from "@/core/repositories/errors/ApiConnectionError";
 import {DeliveryError} from "@/core/repositories/errors/DeliveryError";
-import {formatUrl} from "@/core/repositories/delivery-methods/rest/utils";
+import {formatUrl, QueryParameters} from "@/core/repositories/delivery-methods/rest/utils";
 
-export type RestRequestParams = {
+export type RestRequestOptions = {
     data?: any;
+    urlParameters?: QueryParameters;
     headers?: any;
 }
 
-export const restRequest = async (url: string, method: string, params?: RestRequestParams) => {
+export const restRequest = async (url: string, method: string, options?: RestRequestOptions) => {
     let body = null;
     let fetchResponse = null;
 
     try {
         fetchResponse = await axios.request({
-            url: formatUrl(url),
+            url: formatUrl(url, options?.urlParameters),
             method,
-            ...params,
-            data: params?.data,
+            ...options,
+            data: options?.data,
             headers: {
                 'Content-Type': 'application/json',
-                ...params?.headers
+                ...options?.headers
             }
         });
     } catch (error) {
