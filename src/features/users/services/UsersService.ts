@@ -1,4 +1,5 @@
 import {IUsersApiRepository} from "@/features/users/repositories/UsersApiRepository";
+import {IUsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
 
 export interface IUsersService {
     getAllUsers: () => Promise<any[]>;
@@ -6,6 +7,7 @@ export interface IUsersService {
 
 export type UsersServiceDependencies = {
     apiRepository: IUsersApiRepository;
+    dbRepository: IUsersDbRepository;
 }
 
 export const UsersService = (dependencies: UsersServiceDependencies) => {
@@ -13,7 +15,7 @@ export const UsersService = (dependencies: UsersServiceDependencies) => {
         let users: any[] = [];
 
         try {
-            // TODO: implement get from db
+            users = await dependencies.dbRepository.getUsers();
         } catch (e) {
             console.error("Getting users from DB failed", e)
         }
@@ -23,7 +25,7 @@ export const UsersService = (dependencies: UsersServiceDependencies) => {
         }
 
         try {
-            users = await dependencies.apiRepository.getUsersFromApi();
+            users = await dependencies.apiRepository.getUsers();
         } catch (e) {
             console.error("Getting users from API failed", e)
         }
