@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './Layout.module.css';
 import {Header} from "@/core/components/Layout/Header";
-import {Inter} from "@next/font/google";
+import {Inter} from "next/font/google";
 import clsx from "clsx";
 import Head from "next/head";
 
