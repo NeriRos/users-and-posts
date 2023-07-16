@@ -9,6 +9,8 @@ export type RestRequestOptions = {
     headers?: any;
 }
 
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 export const restRequest = async (url: string, method: string, options?: RestRequestOptions) => {
     let body = null;
     let fetchResponse = null;
