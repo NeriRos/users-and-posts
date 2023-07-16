@@ -5,6 +5,7 @@ import {PostsRepository} from "@/features/posts/repositories/PostsRepository";
 
 export interface PostsDbRepository extends PostsRepository {
     savePosts: (posts: Post[]) => Promise<any>
+    deletePostById: (postId: number) => Promise<any>
 }
 
 export const createPostsDbRepository = (): PostsDbRepository => {
@@ -34,8 +35,17 @@ export const createPostsDbRepository = (): PostsDbRepository => {
         });
     }
 
+    const deletePostById = (postId: number) => {
+        return prisma.post.delete({
+            where: {
+                id: postId
+            },
+        });
+    }
+
     return {
         getPostsByAuthor,
-        savePosts
+        savePosts,
+        deletePostById
     }
 }

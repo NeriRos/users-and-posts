@@ -4,6 +4,7 @@ import {PostsRepository} from "@/features/posts/repositories/PostsRepository";
 
 export interface IPostsService {
     getUserPosts: (userId: number) => Promise<Post[]>;
+    deletePost: (postId: number) => Promise<Post>;
 }
 
 export type PostsServiceDependencies = {
@@ -40,7 +41,12 @@ export const PostsService = (dependencies: PostsServiceDependencies): IPostsServ
         return [];
     }
 
+    const deletePost = async (postId: number): Promise<Post> => {
+        return dependencies.dbRepository.deletePostById(postId);
+    }
+
     return {
-        getUserPosts
+        getUserPosts,
+        deletePost
     }
 }
