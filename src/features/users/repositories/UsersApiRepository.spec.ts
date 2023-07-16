@@ -13,4 +13,10 @@ describe('UsersApiRepository', () => {
 
         expect(users?.length).toBeGreaterThan(0);
     });
+
+    it("should return user by id from api", async () => {
+        const user = await repositoryInstance.getUserById(1);
+
+        expect(user).toBeDefined();
+    });
 });

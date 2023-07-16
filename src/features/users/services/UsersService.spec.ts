@@ -29,7 +29,22 @@ const users: User[] = [
 ];
 
 describe('UsersService', () => {
-    describe('Get users', () => {
+    describe('Get User', () => {
+        it('should get user by id', async () => {
+            (UsersApiRepositoryMock.getUserById as jest.Mock).mockReturnValue(users[0]);
+
+            const usersServiceInstance: IUsersService = UsersService({
+                apiRepository: UsersApiRepositoryMock,
+                dbRepository: UsersDbRepositoryMock
+            });
+
+            await usersServiceInstance.getUser(users[0].id);
+
+            expect(UsersApiRepositoryMock.getUserById).toHaveBeenCalledWith(users[0].id);
+        });
+    });
+
+    describe('Get All Users', () => {
         let usersServiceInstance: IUsersService;
 
         afterEach(() => {
