@@ -4,3 +4,7 @@ declare module '*module.css' {
     }
     export default styles
 }
+
+declare type Props = {
+    children: React.ReactNode
+}
