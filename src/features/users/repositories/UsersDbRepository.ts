@@ -11,7 +11,7 @@ export const UsersDbRepository = (): IUsersDbRepository => {
     const getUsers = async (): Promise<User[]> => {
         const dbUsers = await prisma.user.findMany();
 
-        return dbUsers.map(dbUser => ({
+        return dbUsers.map(dbUser => User.fromJson({
             id: dbUser.id,
             name: dbUser.name,
             email: dbUser.email,
@@ -20,7 +20,6 @@ export const UsersDbRepository = (): IUsersDbRepository => {
     }
 
     const saveUsers = (users: User[]) => {
-        console.log(users)
         return prisma.user.createMany({
             data: users as Prisma.UserCreateInput[],
             skipDuplicates: true

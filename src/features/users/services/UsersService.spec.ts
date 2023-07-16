@@ -13,7 +13,7 @@ const UsersDbRepositoryMock: IUsersDbRepository = {
 }
 
 const users: User[] = [
-    {
+    User.fromJson({
         id: 1,
         name: "Leanne Graham",
         email: "test@gmail.com",
@@ -23,7 +23,7 @@ const users: User[] = [
             city: "Gwenborough",
             zipcode: "92998-3874"
         }
-    }
+    }),
 ];
 
 describe('UsersService', () => {
