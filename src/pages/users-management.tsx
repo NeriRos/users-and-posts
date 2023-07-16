@@ -1,4 +1,4 @@
-import {UsersManagementPage} from "src/features/users/modules/UsersManagement";
+import {UsersManagementPage} from "@/features/users/pages/users-management";
 
 export default function UsersManagement() {
     return <UsersManagementPage/>;

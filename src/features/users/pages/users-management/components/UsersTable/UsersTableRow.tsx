@@ -1,6 +1,6 @@
 import {User} from "@/features/users/models/User";
 import {AddressText} from "@/core/components/Address";
-import {useUsersTable} from "@/features/users/modules/UsersManagement/components/UsersTable/useUsersTable";
+import {useUsersTable} from "@/features/users/pages/users-management/components/UsersTable/useUsersTable";
 
 export const UsersTableRow = ({user}: { user: User }) => {
     const {onUserSelected} = useUsersTable();

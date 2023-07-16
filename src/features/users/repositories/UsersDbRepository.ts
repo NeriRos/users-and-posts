@@ -20,6 +20,7 @@ export const UsersDbRepository = (): IUsersDbRepository => {
     }
 
     const saveUsers = (users: User[]) => {
+        console.log(users)
         return prisma.user.createMany({
             data: users as Prisma.UserCreateInput[],
             skipDuplicates: true

@@ -1,4 +1,4 @@
-import {UsersTable} from "@/features/users/modules/UsersManagement/components/UsersTable";
+import {UsersTable} from "@/features/users/pages/users-management/components/UsersTable";
 
 export const UsersManagementPage = () => {
     return (
