@@ -5,6 +5,7 @@ import {User} from "@/features/users/models/User";
 
 export interface IUsersApiRepository {
     getUsers: () => Promise<User[]>;
+    getUserById: (userId: number) => Promise<User | undefined>;
 }
 
 export const UsersApiRepository = (): IUsersApiRepository => {
@@ -28,8 +29,15 @@ export const UsersApiRepository = (): IUsersApiRepository => {
         return apiUsers.map((apiUser: ApiUser) => convertApiUserToUser(apiUser));
     }
 
+    const getUserById = async (userId: number): Promise<User | undefined> => {
+        const apiUser: ApiUser = await restGetRequest(`${API_BASE_URL}/${userId}`);
+
+        return convertApiUserToUser(apiUser);
+    }
+
     return {
-        getUsers
+        getUsers,
+        getUserById
     }
 }
 

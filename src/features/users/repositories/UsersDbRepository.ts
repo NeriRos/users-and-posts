@@ -5,9 +5,29 @@ import {Prisma} from "@prisma/client";
 export interface IUsersDbRepository {
     getUsers: () => Promise<User[]>
     saveUsers: (users: User[]) => Promise<any>
+    getUserById: (userId: number) => Promise<User | undefined>
 }
 
 export const UsersDbRepository = (): IUsersDbRepository => {
+    const getUserById = async (userId: number): Promise<User | undefined> => {
+        const dbUser = await prisma.user.findUnique({
+            where: {
+                id: userId
+            }
+        });
+
+        if (dbUser) {
+            return User.fromJson({
+                id: dbUser.id,
+                name: dbUser.name,
+                email: dbUser.email,
+                address: dbUser.address as Address,
+            });
+        }
+
+        return undefined;
+    }
+
     const getUsers = async (): Promise<User[]> => {
         const dbUsers = await prisma.user.findMany();
 
@@ -28,6 +48,7 @@ export const UsersDbRepository = (): IUsersDbRepository => {
 
     return {
         getUsers,
-        saveUsers
+        saveUsers,
+        getUserById
     }
 }

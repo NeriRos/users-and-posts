@@ -4,6 +4,7 @@ import {User} from "@/features/users/models/User";
 
 export interface IUsersService {
     getAllUsers: () => Promise<User[]>;
+    getUser: (userId: number) => Promise<User | undefined>;
 }
 
 export type UsersServiceDependencies = {
@@ -12,6 +13,32 @@ export type UsersServiceDependencies = {
 }
 
 export const UsersService = (dependencies: UsersServiceDependencies): IUsersService => {
+
+    const getUser = async (userId: number): Promise<User | undefined> => {
+        try {
+            const user = await dependencies.dbRepository.getUserById(userId);
+
+            if (user) {
+                return user;
+            }
+        } catch (e) {
+            console.error("Getting user from DB failed", e)
+        }
+
+        try {
+            const user = await dependencies.apiRepository.getUserById(userId);
+            
+            if (user) {
+                await dependencies.dbRepository.saveUsers([user]);
+            }
+
+            return user;
+        } catch (e) {
+            console.error("Getting user from API failed", e)
+        }
+
+        return undefined;
+    }
 
     const getAllUsers = async (): Promise<User[]> => {
         try {
@@ -37,6 +64,7 @@ export const UsersService = (dependencies: UsersServiceDependencies): IUsersServ
     }
 
     return {
+        getUser,
         getAllUsers
     }
 }
