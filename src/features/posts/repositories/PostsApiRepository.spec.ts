@@ -14,4 +14,11 @@ describe('PostsApiRepository', () => {
 
         expect(posts?.length).toBeGreaterThan(0);
     });
+
+    it('should return different posts from api for two different users', async () => {
+        const posts1 = await repositoryInstance.getPostsByAuthor(1);
+        const posts2 = await repositoryInstance.getPostsByAuthor(2);
+
+        expect(posts1).not.toEqual(posts2);
+    });
 });
