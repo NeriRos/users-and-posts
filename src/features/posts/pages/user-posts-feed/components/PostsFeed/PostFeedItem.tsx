@@ -1,12 +1,14 @@
 import {Post} from "@/features/posts/models/Post";
+import {Card} from "@/core/components/Card";
+import {DeleteIcon} from "@/core/components/Icons/DeleteIcon";
+import {usePostsFeed} from "@/features/posts/pages/user-posts-feed/components/PostsFeed/usePostsFeed";
 
 export const PostFeedItem = ({post}: { post: Post }) => {
+    const {deletePost} = usePostsFeed();
+
+    const cardActions = [<DeleteIcon key={"delete"} onClick={() => deletePost(post.id)}/>];
+
     return (
-        <div className={"card"}>
-            <div className={"card-body"}>
-                <h2 className={"card-title"}>{post.title}</h2>
-                <p className={"card-text"}>{post.body}</p>
-            </div>
-        </div>
+        <Card title={post.title} description={post.body} actions={cardActions}/>
     )
 }
