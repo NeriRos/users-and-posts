@@ -1,15 +1,16 @@
 import {Post} from "@/features/posts/models/Post";
 import {PostsDbRepository} from "@/features/posts/repositories/PostsDbRepository";
-import {IPostsApiRepository} from "@/features/posts/repositories/PostsApiRepository";
 import {IPostsService, PostsService} from "@/features/posts/services/PostsService";
+import {PostsRepository} from "@/features/posts/repositories/PostsRepository";
 
-const PostsApiRepositoryMock: IPostsApiRepository = {
+const PostsApiRepositoryMock: PostsRepository = {
     getPostsByAuthor: jest.fn().mockReturnValue([])
 };
 
 const PostsDbRepositoryMock: PostsDbRepository = {
     getPostsByAuthor: jest.fn().mockReturnValue([]),
-    savePosts: jest.fn().mockReturnValue([])
+    savePosts: jest.fn().mockReturnValue([]),
+    deletePostById: jest.fn().mockReturnValue(undefined)
 }
 
 const authorId = 1;
@@ -56,6 +57,19 @@ describe('PostsService', () => {
 
             expect(PostsDbRepositoryMock.getPostsByAuthor).toHaveBeenCalled();
             expect(PostsApiRepositoryMock.getPostsByAuthor).not.toHaveBeenCalled();
+        });
+    });
+
+    describe("Delete post", () => {
+        it("should delete post", async () => {
+            const postId = 1;
+            const postsServiceInstance = PostsService({
+                dbRepository: PostsDbRepositoryMock
+            });
+
+            await postsServiceInstance.deletePost(postId);
+
+            expect(PostsDbRepositoryMock.deletePostById).toHaveBeenCalledWith(postId);
         });
     });
 });
