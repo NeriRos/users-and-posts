@@ -1,5 +1,5 @@
 import {restGetRequest} from "@/core/repositories/delivery-methods/rest/GetRequest";
-import {API_BASE_URL} from "@/features/users/repositories/consts";
+import {API_BASE_URL} from "@/features/posts/repositories/consts";
 import {ApiPost} from "@/features/posts/models/ApiPost";
 import {Post} from "@/features/posts/models/Post";
 
@@ -13,7 +13,7 @@ export const PostsApiRepository = (): IPostsApiRepository => {
             id: apiPost.id,
             title: apiPost.title,
             body: apiPost.body,
-            authorId: apiPost.authorId,
+            authorId: apiPost.userId,
         });
     };
 
