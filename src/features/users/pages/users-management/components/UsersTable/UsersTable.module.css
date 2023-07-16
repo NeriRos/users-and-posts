@@ -17,6 +17,7 @@
     background-color: rgb(var(--callout-rgb));
 }
 
+/* Used 150px and 50% because it looks better */
 .addressColumn {
     width: 50%;
     max-width: 150px;

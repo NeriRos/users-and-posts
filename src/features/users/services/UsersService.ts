@@ -40,6 +40,7 @@ export const UsersService = (dependencies: UsersServiceDependencies): IUsersServ
         return undefined;
     }
 
+    // Getting users from db first and then from api (not only posts)
     const getAllUsers = async (): Promise<User[]> => {
         try {
             const users = await dependencies.dbRepository.getUsers();

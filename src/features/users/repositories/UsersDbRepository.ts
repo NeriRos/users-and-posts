@@ -12,7 +12,7 @@ export const createUsersDbRepository = (): UsersDbRepository => {
         const dbUser = await prisma.user.findUnique({
             where: {
                 id: userId
-            }
+            },
         });
 
         if (dbUser) {
@@ -28,7 +28,11 @@ export const createUsersDbRepository = (): UsersDbRepository => {
     }
 
     const getUsers = async (): Promise<User[]> => {
-        const dbUsers = await prisma.user.findMany();
+        const dbUsers = await prisma.user.findMany({
+            orderBy: {
+                name: 'asc'
+            },
+        });
 
         return dbUsers.map(dbUser => User.fromJson({
             id: dbUser.id,
