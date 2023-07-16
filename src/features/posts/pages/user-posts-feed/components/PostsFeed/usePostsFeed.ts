@@ -1,13 +1,12 @@
 import {useQuery} from "@tanstack/react-query";
-import {getAllUsers} from "@/features/users/pages/users-management/queries/GetAllUsers";
-import {MouseEvent} from "react";
-import {User} from "@/features/users/models/User";
-import {useRouter} from "next/router";
 import {getUserPosts} from "@/features/posts/pages/user-posts-feed/queries/GetUserPosts";
+import {useRouter} from "next/router";
 
-export const usePostsFeed = ({user}: { user: User }) => {
+export const usePostsFeed = () => {
+    const router = useRouter();
+    const {userId} = router.query;
     const {error, data, isLoading} = useQuery({
-        queryKey: [`posts/${user.id}`], queryFn: () => getUserPosts(user.id),
+        queryKey: [`posts`, userId], queryFn: () => getUserPosts(userId as string),
         initialData: [],
     });
 

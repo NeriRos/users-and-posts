@@ -3,18 +3,19 @@ import {UsersApiRepository} from "@/features/users/repositories/UsersApiReposito
 import {UsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
 import {User} from "@/features/users/models/User";
 import {UserPostsFeed} from "@/features/posts/pages/user-posts-feed/components/UserPostsFeed";
+import {GetServerSidePropsContext} from "next";
 
 export default function userPostsManagement(props: { user: User }) {
     return <UserPostsFeed user={props.user}/>;
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const userService = UsersService({
         apiRepository: UsersApiRepository(),
         dbRepository: UsersDbRepository()
     });
 
-    const user = await userService.getUser(1);
+    const user = await userService.getUser(Number(ctx.query["userId"]));
 
     if (!user) {
         return {

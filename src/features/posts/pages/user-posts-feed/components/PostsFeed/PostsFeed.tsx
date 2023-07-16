@@ -4,11 +4,10 @@ import Styles from './PostsFeed.module.css';
 import {usePostsFeed} from "@/features/posts/pages/user-posts-feed/components/PostsFeed/usePostsFeed";
 import {PostFeedItem} from "@/features/posts/pages/user-posts-feed/components/PostsFeed/PostFeedItem";
 import {TEXTS} from "@/features/posts/pages/user-posts-feed/components/PostsFeed/texts";
-import {User} from "@/features/users/models/User";
 import {Post} from "@/features/posts/models/Post";
 
-export const PostsFeed = (props: { user: User }) => {
-    const {posts, isLoading} = usePostsFeed({user: props.user});
+export const PostsFeed = () => {
+    const {posts, isLoading} = usePostsFeed();
 
     return (
         <div className={Styles.posts}>

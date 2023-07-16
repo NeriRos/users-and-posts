@@ -5,7 +5,7 @@ export const UserPostsFeed = (props: { user: User }) => {
     return (
         <>
             <h1>{props.user.name}&quot;s Posts</h1>
-            <PostsFeed user={props.user}/>
+            <PostsFeed/>
         </>
     )
 }

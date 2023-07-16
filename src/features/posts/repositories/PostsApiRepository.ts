@@ -18,7 +18,11 @@ export const PostsApiRepository = (): IPostsApiRepository => {
     };
 
     const getPostsByAuthor = async (authorId: number): Promise<Post[]> => {
-        const apiPosts: ApiPost[] = await restGetRequest(API_BASE_URL);
+        const apiPosts: ApiPost[] = await restGetRequest(API_BASE_URL, {
+            urlParameters: {
+                userId: authorId
+            }
+        });
 
         return apiPosts.map((apiPost: ApiPost) => convertApiPostToPost(apiPost));
     }
