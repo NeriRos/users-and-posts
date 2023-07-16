@@ -1,4 +1,7 @@
+import {useQueryClient} from "@tanstack/react-query";
+
 export const UsersTable = () => {
+    const queryClient = useQueryClient()
 
     return (
         <div>

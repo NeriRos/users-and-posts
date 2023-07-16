@@ -13,6 +13,7 @@
   "dependencies": {
     "@next/font": "13.4.9",
     "@prisma/client": "5.0.0",
+    "@tanstack/react-query": "^4.29.25",
     "@types/node": "20.4.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.7",
@@ -24,7 +25,6 @@
     "prisma": "^5.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-query": "^3.39.3",
     "typescript": "5.1.6"
   },
   "devDependencies": {
