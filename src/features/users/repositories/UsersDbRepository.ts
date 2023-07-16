@@ -1,7 +1,10 @@
 import prisma from "../../../../prisma/client";
+import {User} from "@/features/users/models/User";
+import {Prisma} from "@prisma/client";
 
 export interface IUsersDbRepository {
-    getUsers: () => Promise<any[]>
+    getUsers: () => Promise<User[]>
+    saveUsers: (users: User[]) => Promise<any>
 }
 
 export const UsersDbRepository = () => {
@@ -9,7 +12,15 @@ export const UsersDbRepository = () => {
         return prisma.user.findMany();
     }
 
+    const saveUsers = (users: User[]) => {
+        return prisma.user.createMany({
+            data: users as Prisma.UserCreateInput[],
+            skipDuplicates: true
+        });
+    }
+
     return {
-        getUsers
+        getUsers,
+        saveUsers
     }
 }
