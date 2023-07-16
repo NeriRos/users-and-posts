@@ -4,7 +4,7 @@ export const PostFeedItem = ({post}: { post: Post }) => {
     return (
         <div className={"card"}>
             <div className={"card-body"}>
-                <h5 className={"card-title"}>{post.title}</h5>
+                <h2 className={"card-title"}>{post.title}</h2>
                 <p className={"card-text"}>{post.body}</p>
             </div>
         </div>
