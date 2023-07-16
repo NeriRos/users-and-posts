@@ -105,3 +105,11 @@ a {
         color-scheme: dark;
     }
 }
+
+button {
+    cursor: pointer;
+    border: 1px solid rgb(var(--card-border-rgb));
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    text-align: center;
+}
