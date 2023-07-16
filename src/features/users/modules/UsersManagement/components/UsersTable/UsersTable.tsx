@@ -13,10 +13,10 @@ export const UsersTable = () => {
         <table className={Styles.table}>
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Actions</th>
+                <th>{TEXTS.tableHeaders.name}</th>
+                <th>{TEXTS.tableHeaders.email}</th>
+                <th>{TEXTS.tableHeaders.address}</th>
+                <th>{TEXTS.tableHeaders.actions}</th>
             </tr>
             </thead>
             <tbody>
