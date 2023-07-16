@@ -10,8 +10,10 @@ const usersService = UsersService({
 });
 
 const methodToHandlerMap: { [key: string]: Function } = {
-    GET: (req: NextApiRequest, res: NextApiResponse<Promise<User[]>>) => {
-        return res.status(200).json(usersService.getAllUsers());
+    GET: async (req: NextApiRequest, res: NextApiResponse<User[]>) => {
+        const users = await usersService.getAllUsers();
+
+        return res.status(200).json(users);
     }
 }
 
