@@ -13,7 +13,7 @@ export const usePostsFeed = () => {
     });
 
     const deletePostQuery = async (postId: number) => {
-        await axios.delete(`/user/${userId}/posts/${postId}`)
+        await axios.delete(`/users/${userId}/posts/${postId}`)
 
         await queryClient.invalidateQueries({queryKey: [`posts`, userId]})
     }

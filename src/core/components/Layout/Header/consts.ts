@@ -4,7 +4,7 @@ export const LINKS = [
         label: 'Home'
     },
     {
-        href: '/users-management',
+        href: '/users',
         label: 'Users Management'
     }
 ]

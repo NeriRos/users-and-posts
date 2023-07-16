@@ -12,7 +12,7 @@ export const useUsersTable = () => {
     const router = useRouter()
 
     const onUserSelected = (user: User, e: MouseEvent) => {
-        router.push(`/user/${user.id}/posts`)
+        router.push(`/users/${user.id}/posts`)
     }
 
     return {
