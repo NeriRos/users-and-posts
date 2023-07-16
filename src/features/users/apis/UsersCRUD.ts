@@ -2,6 +2,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 import {UsersService} from "@/features/users/services/UsersService";
 import {UsersApiRepository} from "@/features/users/repositories/UsersApiRepository";
 import {UsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
+import {User} from "@/features/users/models/User";
 
 const usersService = UsersService({
     apiRepository: UsersApiRepository(),
@@ -9,7 +10,9 @@ const usersService = UsersService({
 });
 
 const methodToHandlerMap: { [key: string]: Function } = {
-    GET: usersService.getAllUsers
+    GET: (req: NextApiRequest, res: NextApiResponse<Promise<User[]>>) => {
+        return res.status(200).json(usersService.getAllUsers());
+    }
 }
 
 export const handleUsersCRUD = async (
