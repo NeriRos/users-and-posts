@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 2rem;
+    padding: 1rem;
+    background: rgb(var(--callout-rgb));
+    border-bottom: 1px solid rgb(var(--callout-border-rgb));
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-shadow: var(--secondary-glow);
+}
