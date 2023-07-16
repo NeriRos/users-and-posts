@@ -18,11 +18,23 @@ export const createPostsDbRepository = (): PostsDbRepository => {
         });
     };
 
-    const getPostsByAuthor = async (authorId: number): Promise<Post[]> => {
+    const getPostsByAuthor = async (authorId: number, paginate?: {
+        page: number,
+        perPage: number
+    }): Promise<Post[]> => {
+        const perPage = paginate?.perPage || 10;
+
         const dbPosts = await prisma.post.findMany({
             where: {
                 authorId
-            }
+            },
+            orderBy: {
+                title: 'desc',
+            },
+            ...(paginate && {
+                skip: perPage * (paginate.page - 1),
+                take: perPage
+            })
         });
 
         return dbPosts.map(dbPost => convertDbPostToPost(dbPost));
