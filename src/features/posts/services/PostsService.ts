@@ -7,7 +7,7 @@ export interface IPostsService {
 }
 
 export type PostsServiceDependencies = {
-    apiRepository: PostsRepository;
+    apiRepository?: PostsRepository;
     dbRepository: PostsDbRepository;
 }
 
@@ -22,6 +22,10 @@ export const PostsService = (dependencies: PostsServiceDependencies): IPostsServ
             }
         } catch (e) {
             console.error("Getting posts from DB failed", e)
+        }
+
+        if (!dependencies.apiRepository) {
+            return [];
         }
 
         try {
