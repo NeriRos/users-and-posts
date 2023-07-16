@@ -6,7 +6,7 @@ import {UsersTableRow} from "@/features/users/modules/UsersManagement/components
 import Styles from './UsersTable.module.css';
 
 export const UsersTable = () => {
-    const queryClient = useQueryClient()
+    const {users} = useUsersTable();
 
     return (
         <table className={Styles.table}>
