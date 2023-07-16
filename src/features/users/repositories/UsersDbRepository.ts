@@ -1,14 +1,13 @@
 import prisma from "../../../../prisma/client";
 import {Address, User} from "@/features/users/models/User";
 import {Prisma} from "@prisma/client";
+import {UsersRepository} from "@/features/users/repositories/UsersRepository";
 
-export interface IUsersDbRepository {
-    getUsers: () => Promise<User[]>
+export interface UsersDbRepository extends UsersRepository {
     saveUsers: (users: User[]) => Promise<any>
-    getUserById: (userId: number) => Promise<User | undefined>
 }
 
-export const UsersDbRepository = (): IUsersDbRepository => {
+export const createUsersDbRepository = (): UsersDbRepository => {
     const getUserById = async (userId: number): Promise<User | undefined> => {
         const dbUser = await prisma.user.findUnique({
             where: {

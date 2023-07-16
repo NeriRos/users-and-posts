@@ -2,12 +2,9 @@ import {restGetRequest} from "@/core/repositories/delivery-methods/rest/GetReque
 import {API_BASE_URL} from "@/features/posts/repositories/consts";
 import {ApiPost} from "@/features/posts/models/ApiPost";
 import {Post} from "@/features/posts/models/Post";
+import {PostsRepository} from "@/features/posts/repositories/PostsRepository";
 
-export interface IPostsApiRepository {
-    getPostsByAuthor: (authorId: number) => Promise<Post[]>;
-}
-
-export const PostsApiRepository = (): IPostsApiRepository => {
+export const createPostsApiRepository = (): PostsRepository => {
     const convertApiPostToPost = (apiPost: ApiPost): Post => {
         return Post.fromJson({
             id: apiPost.id,

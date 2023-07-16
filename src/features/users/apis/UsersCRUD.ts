@@ -1,13 +1,13 @@
 import {NextApiResponse} from "next";
 import {UsersService} from "@/features/users/services/UsersService";
-import {UsersApiRepository} from "@/features/users/repositories/UsersApiRepository";
-import {UsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
+import {createUsersApiRepository} from "@/features/users/repositories/UsersApiRepository";
+import {createUsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
 import {User} from "@/features/users/models/User";
 import {createApiRequestHandler, MethodToHandlerMapType} from "@/core/api/apiRequestHandler";
 
 const usersService = UsersService({
-    apiRepository: UsersApiRepository(),
-    dbRepository: UsersDbRepository()
+    apiRepository: createUsersApiRepository(),
+    dbRepository: createUsersDbRepository()
 });
 
 export const handleUsersCRUD = createApiRequestHandler({

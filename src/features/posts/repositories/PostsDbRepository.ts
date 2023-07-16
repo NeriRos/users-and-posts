@@ -1,13 +1,13 @@
 import prisma from "../../../../prisma/client";
 import {Prisma} from "@prisma/client";
 import {Post} from "@/features/posts/models/Post";
+import {PostsRepository} from "@/features/posts/repositories/PostsRepository";
 
-export interface IPostsDbRepository {
-    getPostsByAuthor: (authorId: number) => Promise<Post[]>
+export interface PostsDbRepository extends PostsRepository {
     savePosts: (posts: Post[]) => Promise<any>
 }
 
-export const PostsDbRepository = (): IPostsDbRepository => {
+export const createPostsDbRepository = (): PostsDbRepository => {
     const convertDbPostToPost = (apiPost: any): Post => {
         return Post.fromJson({
             id: apiPost.id,

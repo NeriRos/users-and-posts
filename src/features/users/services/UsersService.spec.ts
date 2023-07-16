@@ -1,15 +1,17 @@
 import {UsersService, IUsersService} from "@/features/users/services/UsersService";
-import {IUsersApiRepository} from "@/features/users/repositories/UsersApiRepository";
-import {IUsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
+import {UsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
 import {User} from "@/features/users/models/User";
+import {UsersRepository} from "@/features/users/repositories/UsersRepository";
 
-const UsersApiRepositoryMock: IUsersApiRepository = {
-    getUsers: jest.fn().mockReturnValue([])
+const UsersApiRepositoryMock: UsersRepository = {
+    getUsers: jest.fn().mockReturnValue([]),
+    getUserById: jest.fn().mockReturnValue(undefined)
 };
 
-const UsersDbRepositoryMock: IUsersDbRepository = {
+const UsersDbRepositoryMock: UsersDbRepository = {
     getUsers: jest.fn().mockReturnValue([]),
-    saveUsers: jest.fn().mockReturnValue([])
+    saveUsers: jest.fn().mockReturnValue([]),
+    getUserById: jest.fn().mockReturnValue(undefined)
 }
 
 const users: User[] = [

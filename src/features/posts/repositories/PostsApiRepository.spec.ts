@@ -1,12 +1,13 @@
-import {IPostsApiRepository, PostsApiRepository} from "@/features/posts/repositories/PostsApiRepository";
+import {createPostsApiRepository} from "@/features/posts/repositories/PostsApiRepository";
+import {PostsRepository} from "@/features/posts/repositories/PostsRepository";
 
 describe('PostsApiRepository', () => {
-    let repositoryInstance: IPostsApiRepository;
+    let repositoryInstance: PostsRepository;
 
     const authorId = 1;
 
     beforeAll(() => {
-        repositoryInstance = PostsApiRepository();
+        repositoryInstance = createPostsApiRepository();
     })
 
     it('should return posts from api', async () => {

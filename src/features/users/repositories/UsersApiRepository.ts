@@ -2,13 +2,9 @@ import {restGetRequest} from "@/core/repositories/delivery-methods/rest/GetReque
 import {ApiUser} from "@/features/users/models/ApiUser";
 import {API_BASE_URL} from "@/features/users/repositories/consts";
 import {User} from "@/features/users/models/User";
+import {UsersRepository} from "@/features/users/repositories/UsersRepository";
 
-export interface IUsersApiRepository {
-    getUsers: () => Promise<User[]>;
-    getUserById: (userId: number) => Promise<User | undefined>;
-}
-
-export const UsersApiRepository = (): IUsersApiRepository => {
+export const createUsersApiRepository = (): UsersRepository => {
     const convertApiUserToUser = (apiUser: ApiUser): User => {
         return User.fromJson({
             id: apiUser.id,

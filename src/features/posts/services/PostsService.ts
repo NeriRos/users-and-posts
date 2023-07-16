@@ -1,14 +1,14 @@
-import {IPostsApiRepository} from "@/features/posts/repositories/PostsApiRepository";
-import {IPostsDbRepository} from "@/features/posts/repositories/PostsDbRepository";
+import {PostsDbRepository} from "@/features/posts/repositories/PostsDbRepository";
 import {Post} from "@/features/posts/models/Post";
+import {PostsRepository} from "@/features/posts/repositories/PostsRepository";
 
 export interface IPostsService {
     getUserPosts: (userId: number) => Promise<Post[]>;
 }
 
 export type PostsServiceDependencies = {
-    apiRepository: IPostsApiRepository;
-    dbRepository: IPostsDbRepository;
+    apiRepository: PostsRepository;
+    dbRepository: PostsDbRepository;
 }
 
 export const PostsService = (dependencies: PostsServiceDependencies): IPostsService => {

@@ -1,5 +1,5 @@
 import {Post} from "@/features/posts/models/Post";
-import {IPostsDbRepository} from "@/features/posts/repositories/PostsDbRepository";
+import {PostsDbRepository} from "@/features/posts/repositories/PostsDbRepository";
 import {IPostsApiRepository} from "@/features/posts/repositories/PostsApiRepository";
 import {IPostsService, PostsService} from "@/features/posts/services/PostsService";
 
@@ -7,7 +7,7 @@ const PostsApiRepositoryMock: IPostsApiRepository = {
     getPostsByAuthor: jest.fn().mockReturnValue([])
 };
 
-const PostsDbRepositoryMock: IPostsDbRepository = {
+const PostsDbRepositoryMock: PostsDbRepository = {
     getPostsByAuthor: jest.fn().mockReturnValue([]),
     savePosts: jest.fn().mockReturnValue([])
 }

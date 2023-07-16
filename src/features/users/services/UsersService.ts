@@ -1,6 +1,6 @@
-import {IUsersApiRepository} from "@/features/users/repositories/UsersApiRepository";
-import {IUsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
+import {UsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
 import {User} from "@/features/users/models/User";
+import {UsersRepository} from "@/features/users/repositories/UsersRepository";
 
 export interface IUsersService {
     getAllUsers: () => Promise<User[]>;
@@ -8,8 +8,8 @@ export interface IUsersService {
 }
 
 export type UsersServiceDependencies = {
-    apiRepository: IUsersApiRepository;
-    dbRepository: IUsersDbRepository;
+    apiRepository: UsersRepository;
+    dbRepository: UsersDbRepository;
 }
 
 export const UsersService = (dependencies: UsersServiceDependencies): IUsersService => {
@@ -27,7 +27,7 @@ export const UsersService = (dependencies: UsersServiceDependencies): IUsersServ
 
         try {
             const user = await dependencies.apiRepository.getUserById(userId);
-            
+
             if (user) {
                 await dependencies.dbRepository.saveUsers([user]);
             }
