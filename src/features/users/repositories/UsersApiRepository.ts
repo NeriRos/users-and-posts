@@ -1,10 +1,10 @@
 import {restGetRequest} from "@/core/repositories/delivery-methods/rest/GetRequest";
 import {ApiUser} from "@/features/users/models/ApiUser";
 import {API_BASE_URL} from "@/features/users/repositories/consts";
-import {User, UserWithoutPosts} from "@/features/users/models/User";
+import {UserWithoutPosts} from "@/features/users/models/User";
 
 export interface IUsersApiRepository {
-    getUsers: () => Promise<User[]>;
+    getUsers: () => Promise<UserWithoutPosts[]>;
 }
 
 export const UsersApiRepository = () => {
@@ -17,13 +17,14 @@ export const UsersApiRepository = () => {
         };
 
         return {
+            id: apiUser.id,
             email: apiUser.email,
             name: apiUser.name,
             address,
         }
     };
 
-    const getUsers = async (): Promise<User[]> => {
+    const getUsers = async (): Promise<UserWithoutPosts[]> => {
         const apiUsers: ApiUser[] = await restGetRequest(API_BASE_URL);
 
         return apiUsers.map((apiUser: ApiUser) => convertApiUserToUser(apiUser));

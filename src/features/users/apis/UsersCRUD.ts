@@ -1,9 +1,11 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {UsersService} from "@/features/users/services/UsersService";
 import {UsersApiRepository} from "@/features/users/repositories/UsersApiRepository";
+import {UsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
 
 const usersService = UsersService({
-    apiRepository: UsersApiRepository()
+    apiRepository: UsersApiRepository(),
+    dbRepository: UsersDbRepository()
 });
 
 const methodToHandlerMap: { [key: string]: Function } = {

@@ -3,7 +3,7 @@ import {IUsersDbRepository} from "@/features/users/repositories/UsersDbRepositor
 import {User} from "@/features/users/models/User";
 
 export interface IUsersService {
-    getAllUsers: () => Promise<any[]>;
+    getAllUsers: () => Promise<User[]>;
 }
 
 export type UsersServiceDependencies = {

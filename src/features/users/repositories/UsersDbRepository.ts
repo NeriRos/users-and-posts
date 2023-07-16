@@ -1,5 +1,5 @@
 import prisma from "../../../../prisma/client";
-import {User} from "@/features/users/models/User";
+import {Address, User} from "@/features/users/models/User";
 import {Prisma} from "@prisma/client";
 
 export interface IUsersDbRepository {
@@ -7,9 +7,16 @@ export interface IUsersDbRepository {
     saveUsers: (users: User[]) => Promise<any>
 }
 
-export const UsersDbRepository = () => {
-    const getUsers = () => {
-        return prisma.user.findMany();
+export const UsersDbRepository = (): IUsersDbRepository => {
+    const getUsers = async (): Promise<User[]> => {
+        const dbUsers = await prisma.user.findMany();
+
+        return dbUsers.map(dbUser => ({
+            id: dbUser.id,
+            name: dbUser.name,
+            email: dbUser.email,
+            address: dbUser.address as Address,
+        }));
     }
 
     const saveUsers = (users: User[]) => {

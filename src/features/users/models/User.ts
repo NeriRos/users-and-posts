@@ -1,4 +1,13 @@
-import {Prisma} from '@prisma/client'
+export type User = {
+    id: number
+    name: string
+    email: string
+    address: {
+        street: string
+        city: string
+        zipcode: string
+        suite: string
+    }
+};
 
-export type User = Prisma.UserCreateInput;
-export type UserWithoutPosts = Omit<User, 'posts'>;
+export type Address = User['address'];
