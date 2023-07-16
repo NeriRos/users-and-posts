@@ -15,7 +15,7 @@ export const UsersTable = () => {
             <tr>
                 <th>{TEXTS.tableHeaders.name}</th>
                 <th>{TEXTS.tableHeaders.email}</th>
-                <th>{TEXTS.tableHeaders.address}</th>
+                <th className={Styles.addressColumn}>{TEXTS.tableHeaders.address}</th>
                 <th>{TEXTS.tableHeaders.actions}</th>
             </tr>
             </thead>
