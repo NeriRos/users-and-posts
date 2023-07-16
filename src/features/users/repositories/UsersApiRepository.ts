@@ -7,7 +7,7 @@ export interface IUsersApiRepository {
     getUsers: () => Promise<User[]>;
 }
 
-export const UsersApiRepository = () => {
+export const UsersApiRepository = (): IUsersApiRepository => {
     const convertApiUserToUser = (apiUser: ApiUser): User => {
         return User.fromJson({
             id: apiUser.id,

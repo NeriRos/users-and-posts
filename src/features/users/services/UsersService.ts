@@ -11,7 +11,7 @@ export type UsersServiceDependencies = {
     dbRepository: IUsersDbRepository;
 }
 
-export const UsersService = (dependencies: UsersServiceDependencies) => {
+export const UsersService = (dependencies: UsersServiceDependencies): IUsersService => {
 
     const getAllUsers = async (): Promise<User[]> => {
         try {
