@@ -1,6 +1,6 @@
 import {SORT_DIRECTION} from "@/features/users/pages/users-management/components/UsersTable/consts";
 
-import Styles from '../UsersTable.module.css';
+import Styles from '../../../features/users/pages/users-management/components/UsersTable/UsersTable.module.css';
 import {FaChevronDown, FaChevronUp} from "react-icons/fa";
 
 export const ColumnSort = (props: { sortKey: string, onChange: (direction: string, key: string) => void }) => {

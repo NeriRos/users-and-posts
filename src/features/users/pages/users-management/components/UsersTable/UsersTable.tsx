@@ -5,7 +5,7 @@ import {UsersTableRow} from "@/features/users/pages/users-management/components/
 
 import Styles from './UsersTable.module.css';
 import {TEXTS} from "@/features/users/pages/users-management/components/UsersTable/texts";
-import {ColumnSort} from "@/features/users/pages/users-management/components/UsersTable/components/ColumnSort";
+import {ColumnSort} from "@/core/components/Table/ColumnSort";
 
 export const UsersTable = () => {
     const {users, isLoading, changeSortDirection} = useUsersTable();
