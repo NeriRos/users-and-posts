@@ -22,8 +22,9 @@ export const Pagination = (props: PaginationProps) => {
     const pages = Array.from(Array(pagesCount).keys()).map(i => i + 1)
     const router = useRouter();
     const currentPage = router.query.page ? Number(router.query.page) : 1;
+
     const onPageChange = (page: number) => {
-        router.push({pathname: router.pathname, query: {...router.query, page}})
+        router.push({pathname: router.pathname, query: {...router.query, page, perPage}})
         props.onChange({page, count: perPage})
     }
 

@@ -16,11 +16,13 @@ export const PostsFeed = () => {
             {isLoading ? <span>{TEXTS.loadingText}</span> :
                 <PostsSearch posts={posts}>
                     {(filteredPosts: Post[]) =>
-                        <div className={clsx([Styles.posts, 'grid'])}>
-                            {filteredPosts.map((post: Post) => <PostFeedItem
-                                key={post.id}
-                                post={post}/>)}
-                        </div>}
+                        filteredPosts.length === 0 ?
+                            <span>{TEXTS.NOT_ITEMS_FOUND}</span> :
+                            <div className={clsx([Styles.posts, 'grid'])}>
+                                {filteredPosts.map((post: Post) => <PostFeedItem
+                                    key={post.id}
+                                    post={post}/>)}
+                            </div>}
                 </PostsSearch>
             }
         </div>
