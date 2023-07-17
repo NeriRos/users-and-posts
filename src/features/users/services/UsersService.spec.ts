@@ -51,20 +51,20 @@ describe('UsersService', () => {
         afterEach(() => {
             jest.clearAllMocks();
         });
-        ~
 
-            it('should get from API because Db is empty', async () => {
-                (UsersApiRepositoryMock.getUsers as jest.Mock).mockReturnValue(users);
 
-                usersServiceInstance = UsersService({
-                    apiRepository: UsersApiRepositoryMock,
-                    dbRepository: UsersDbRepositoryMock
-                });
+        it('should get from API because Db is empty', async () => {
+            (UsersApiRepositoryMock.getUsers as jest.Mock).mockReturnValue(users);
 
-                await usersServiceInstance.getUsers();
-
-                expect(UsersApiRepositoryMock.getUsers).toHaveBeenCalled();
+            usersServiceInstance = UsersService({
+                apiRepository: UsersApiRepositoryMock,
+                dbRepository: UsersDbRepositoryMock
             });
+
+            await usersServiceInstance.getUsers();
+
+            expect(UsersApiRepositoryMock.getUsers).toHaveBeenCalled();
+        });
 
         it('should get from DB', async () => {
             (UsersDbRepositoryMock.getUsers as jest.Mock).mockReturnValue(users)
