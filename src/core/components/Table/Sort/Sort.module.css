@@ -1,0 +1,22 @@
+.tableSorter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tableSorter :global(svg) {
+    cursor: pointer;
+}
+
+.tableSorter :global(input) {
+    display: none;
+}
+
+.tableSorter :global(label) {
+    color: rgb(var(--background-start-rgb));
+}
+
+.tableSorter :global(label:has(input:checked)) {
+    color: rgb(var(--background-end-rgb));
+}

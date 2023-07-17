@@ -6,7 +6,7 @@ import {useRouter} from "next/router";
 import {SORT_DIRECTION} from "@/features/users/pages/users-management/components/UsersTable/consts";
 import {PaginationParameters} from "@/core/components/Table";
 import {GetUsersResponse} from "@/features/users/apis/UsersCRUD";
-import {PAGINATION_PER_PAGE} from "@/core/components/Table/consts";
+import {PAGINATION_PER_PAGE} from "@/core/components/Table/Pagination/consts";
 
 export const useUsersTable = () => {
     const router = useRouter()

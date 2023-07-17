@@ -1,7 +1,7 @@
-import Styles from './Table.module.css';
+import Styles from './Pagination.module.css';
 import {useState} from "react";
 import clsx from "clsx";
-import {PAGINATION_PER_PAGE} from "@/core/components/Table/consts";
+import {PAGINATION_PER_PAGE} from "./consts";
 import {useRouter} from "next/router";
 
 export type PaginationParameters = {
@@ -43,7 +43,7 @@ export const Pagination = (props: PaginationProps) => {
 
     return <div className={Styles.pagination}>
         <div className={Styles.perPage}>
-            <select name={"perPage"} value={perPage} onChange={onChangePerPage}>
+            <select name={"perPage"} value={perPage || -1} onChange={onChangePerPage}>
                 {PAGINATION_PER_PAGE.map(perPageItem =>
                     <option key={perPageItem} value={perPageItem}>{perPageItem}</option>
                 )}

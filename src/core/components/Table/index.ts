@@ -1,3 +1,3 @@
 export * from './Table';
-export * from './Pagination';
-export * from './ColumnSort';
+export * from './Pagination/Pagination';
+export * from './Sort/ColumnSort';
