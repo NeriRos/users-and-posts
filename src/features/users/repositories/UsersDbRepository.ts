@@ -2,6 +2,7 @@ import prisma from "../../../../prisma/client";
 import {Address, User} from "@/features/users/models/User";
 import {Prisma} from "@prisma/client";
 import {UsersRepository} from "@/features/users/repositories/UsersRepository";
+import {PaginationParameters} from "@/core/components/Table";
 
 export interface UsersDbRepository extends UsersRepository {
     saveUsers: (users: User[]) => Promise<any>
@@ -28,11 +29,11 @@ export const createUsersDbRepository = (): UsersDbRepository => {
         return undefined;
     }
 
-    const getUsers = async (count?: number, page?: number): Promise<User[]> => {
+    const getUsers = async (paginate?: PaginationParameters): Promise<User[]> => {
         const dbUsers = await prisma.user.findMany(
-            count && page ? {
-                take: count,
-                skip: count * (page - 1)
+            paginate ? {
+                skip: paginate.count! * (paginate.page! - 1),
+                take: paginate.count
             } : undefined
         );
 

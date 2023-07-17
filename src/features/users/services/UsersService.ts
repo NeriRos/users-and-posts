@@ -1,10 +1,11 @@
 import {UsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
 import {User} from "@/features/users/models/User";
 import {UsersRepository} from "@/features/users/repositories/UsersRepository";
+import {PaginationParameters} from "@/core/components/Table";
 
 export interface IUsersService {
     countUsers: () => Promise<number>;
-    getUsers: (count?: number, page?: number) => Promise<User[]>;
+    getUsers: (pagination?: PaginationParameters) => Promise<User[]>;
     getUser: (userId: number) => Promise<User | undefined>;
 }
 
@@ -42,9 +43,9 @@ export const UsersService = (dependencies: UsersServiceDependencies): IUsersServ
     }
 
     // Getting users from db first and then from api (not only posts)
-    const getUsers = async (count?: number, page?: number): Promise<User[]> => {
+    const getUsers = async (pagination?: PaginationParameters): Promise<User[]> => {
         try {
-            const users = await dependencies.dbRepository.getUsers(count, page);
+            const users = await dependencies.dbRepository.getUsers(pagination);
 
             if (users.length > 0) {
                 return users;

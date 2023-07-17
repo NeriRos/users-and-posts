@@ -4,6 +4,7 @@ import {createUsersApiRepository} from "@/features/users/repositories/UsersApiRe
 import {createUsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
 import {User} from "@/features/users/models/User";
 import {createApiRequestHandler} from "@/core/api/apiRequestHandler";
+import {PAGINATION_PER_PAGE} from "@/core/components/Table/Pagination/consts";
 
 const usersService = UsersService({
     apiRepository: createUsersApiRepository(),
@@ -17,11 +18,11 @@ export type GetUsersResponse = {
 
 export const handleUsersCRUD = createApiRequestHandler({
     GET: async (req, res: NextApiResponse<GetUsersResponse>) => {
-        const count = req.query.count ? Number(req.query.count) : undefined;
-        const page = req.query.page ? Number(req.query.page) : undefined;
+        const count = req.query.count ? Number(req.query.count) : PAGINATION_PER_PAGE[0];
+        const page = req.query.page ? Number(req.query.page) : 1;
 
         const usersCount = await usersService.countUsers();
-        const users = await usersService.getUsers(count, page);
+        const users = await usersService.getUsers({count, page});
 
         return res.status(200).json({users, usersCount});
     }
