@@ -58,7 +58,7 @@ export const useUsersTable = () => {
         if (router.query.page && !paginatedInitial.current) {
             paginate({
                 page: Number(router.query.page),
-                count: PAGINATION_PER_PAGE[0],
+                count: router.query.perPage ? Number(router.query.perPage) : PAGINATION_PER_PAGE[0],
             })
             paginatedInitial.current = true;
         }

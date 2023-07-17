@@ -28,14 +28,16 @@ export const Pagination = (props: PaginationProps) => {
     }
 
     const onChangePerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        let page = currentPage;
         const perPage = Number(e.target.value);
-        setPerPage(perPage);
 
         if (perPage * currentPage > props.itemsCount) {
-            onPageChange(1)
+            page = 1;
         }
 
-        props.onChange({count: perPage, page: currentPage});
+        setPerPage(perPage);
+        router.push({pathname: router.pathname, query: {...router.query, perPage, page}})
+        props.onChange({count: perPage, page});
     }
 
     return <div className={Styles.pagination}>
