@@ -1,0 +1,55 @@
+.tableContainer {
+    width: 100%;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table :global(th), .table :global(td) {
+    border: 1px solid #ddd;
+    padding: 8px;
+    position: relative;
+}
+
+.table :global(th) {
+    background-color: rgb(var(--card-rgb));
+}
+
+.table :global(tr:nth-child(even)) {
+    background-color: rgb(var(--callout-rgb));
+}
+
+.table :global(.sortingHeader) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table :global(.sortingHeader > *:not(:first-child)) {
+    padding-left: 0.5rem;
+}
+
+.tableSorter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tableSorter :global(svg) {
+    cursor: pointer;
+}
+
+.tableSorter :global(input) {
+    display: none;
+}
+
+.tableSorter :global(label) {
+    color: rgb(var(--background-start-rgb));
+}
+
+.tableSorter :global(label:has(input:checked)) {
+    color: rgb(var(--background-end-rgb));
+}

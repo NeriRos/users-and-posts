@@ -1,25 +1,23 @@
 import {SORT_DIRECTION} from "@/features/users/pages/users-management/components/UsersTable/consts";
 
-import Styles from './Table.module.css';
+import Styles from '../../../features/users/pages/users-management/components/UsersTable/UsersTable.module.css';
 import {FaChevronDown, FaChevronUp} from "react-icons/fa";
 
-export const ColumnSort = (props: { sortKey: string, onChange: (direction: string, key: string) => void }) => {
+export const Pagination = (props: { perPage: number, page: number, onChange: (page: number) => void }) => {
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        props.onChange(e.target.value, props.sortKey)
+        props.onChange(Number(e.target.value))
     }
 
-    const name = `sort-${props.sortKey}`;
+    const name = `pagination`;
 
-    return <div className={Styles.tableSorter}>
+    return <div className={Styles.pagination}>
         <label>
-            <FaChevronUp/>
             <input type="radio"
                    name={name}
                    value={SORT_DIRECTION.ASC}
                    onChange={onChange}/>
         </label>
         <label>
-            <FaChevronDown/>
             <input type="radio"
                    name={name}
                    value={SORT_DIRECTION.DESC}
