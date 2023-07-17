@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+.tableContainer {
+    width: 100%;
+}
+
 .table :global(th), .table :global(td) {
     border: 1px solid #ddd;
     padding: 8px;
@@ -13,9 +17,20 @@
     background-color: rgb(var(--card-rgb));
 }
 
-.table :global(td:nth-child(even)) {
+.table :global(tr:nth-child(even)) {
     background-color: rgb(var(--callout-rgb));
 }
+
+.sortingHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sortingHeader :global(> *:not(:first-child)) {
+    padding-left: 0.5rem;
+}
+
 
 /* Used 150px and 50% because it looks better */
 .addressColumn {
@@ -30,4 +45,27 @@
     .addressColumn {
         display: none;
     }
+}
+
+.tableSorting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tableSorting :global(svg) {
+    cursor: pointer;
+}
+
+.tableSorting :global(input) {
+    display: none;
+}
+
+.tableSorting :global(label) {
+    color: rgb(var(--background-start-rgb));
+}
+
+.tableSorting :global(label:has(input:checked)) {
+    color: rgb(var(--background-end-rgb));
 }
