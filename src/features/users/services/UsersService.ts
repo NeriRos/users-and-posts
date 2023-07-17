@@ -3,7 +3,8 @@ import {User} from "@/features/users/models/User";
 import {UsersRepository} from "@/features/users/repositories/UsersRepository";
 
 export interface IUsersService {
-    getAllUsers: () => Promise<User[]>;
+    countUsers: () => Promise<number>;
+    getUsers: (count?: number, page?: number) => Promise<User[]>;
     getUser: (userId: number) => Promise<User | undefined>;
 }
 
@@ -41,9 +42,9 @@ export const UsersService = (dependencies: UsersServiceDependencies): IUsersServ
     }
 
     // Getting users from db first and then from api (not only posts)
-    const getAllUsers = async (): Promise<User[]> => {
+    const getUsers = async (count?: number, page?: number): Promise<User[]> => {
         try {
-            const users = await dependencies.dbRepository.getUsers();
+            const users = await dependencies.dbRepository.getUsers(count, page);
 
             if (users.length > 0) {
                 return users;
@@ -64,8 +65,31 @@ export const UsersService = (dependencies: UsersServiceDependencies): IUsersServ
         return [];
     }
 
+    const countUsers = async (): Promise<number> => {
+        try {
+            const usersCount = await dependencies.dbRepository.countUsers();
+
+            if (usersCount) {
+                return usersCount;
+            }
+        } catch (e) {
+            console.error("Counting users from DB failed", e)
+        }
+
+        try {
+            const users = await dependencies.apiRepository.getUsers();
+
+            return users.length;
+        } catch (e) {
+            console.error("Counting users from API failed", e)
+        }
+
+        return 0;
+    }
+
     return {
         getUser,
-        getAllUsers
+        getUsers,
+        countUsers
     }
 }

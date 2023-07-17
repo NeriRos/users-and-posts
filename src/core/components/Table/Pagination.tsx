@@ -1,27 +1,59 @@
-import {SORT_DIRECTION} from "@/features/users/pages/users-management/components/UsersTable/consts";
+import Styles from './Table.module.css';
+import {useState} from "react";
+import clsx from "clsx";
+import {PAGINATION_PER_PAGE} from "@/core/components/Table/consts";
+import {useRouter} from "next/router";
 
-import Styles from '../../../features/users/pages/users-management/components/UsersTable/UsersTable.module.css';
-import {FaChevronDown, FaChevronUp} from "react-icons/fa";
+export type PaginationParameters = {
+    count?: number,
+    page?: number
+}
 
-export const Pagination = (props: { perPage: number, page: number, onChange: (page: number) => void }) => {
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        props.onChange(Number(e.target.value))
+export type PaginationProps = {
+    perPage?: number,
+    page?: number,
+    itemsCount: number,
+    onChange: (parameters: PaginationParameters) => void
+}
+
+export const Pagination = (props: PaginationProps) => {
+    const [perPage, setPerPage] = useState(props.perPage || PAGINATION_PER_PAGE[0])
+    const pagesCount = Math.round(props.itemsCount / perPage)
+    const pages = Array.from(Array(pagesCount).keys()).map(i => i + 1)
+    const router = useRouter();
+    const currentPage = router.query.page ? Number(router.query.page) : 1;
+    const onPageChange = (page: number) => {
+        router.push({pathname: router.pathname, query: {...router.query, page}})
+        props.onChange({page, count: perPage})
     }
 
-    const name = `pagination`;
+    const onChangePerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const perPage = Number(e.target.value);
+        setPerPage(perPage);
+
+        if (perPage * currentPage > props.itemsCount) {
+            onPageChange(1)
+        }
+
+        props.onChange({count: perPage, page: currentPage});
+    }
 
     return <div className={Styles.pagination}>
-        <label>
-            <input type="radio"
-                   name={name}
-                   value={SORT_DIRECTION.ASC}
-                   onChange={onChange}/>
-        </label>
-        <label>
-            <input type="radio"
-                   name={name}
-                   value={SORT_DIRECTION.DESC}
-                   onChange={onChange}/>
-        </label>
+        <div className={Styles.perPage}>
+            <select name={"perPage"} value={perPage} onChange={onChangePerPage}>
+                {PAGINATION_PER_PAGE.map(perPageItem =>
+                    <option key={perPageItem} value={perPageItem}>{perPageItem}</option>
+                )}
+            </select>
+        </div>
+        <div className={Styles.numbers}>
+            {pages.map(pageNumber =>
+                <button key={pageNumber}
+                        className={clsx([Styles.number, pageNumber === currentPage && Styles.active])}
+                        onClick={() => onPageChange(pageNumber)}>
+                    {pageNumber}
+                </button>
+            )}
+        </div>
     </div>
 }

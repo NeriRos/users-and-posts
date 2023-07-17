@@ -10,10 +10,19 @@ const usersService = UsersService({
     dbRepository: createUsersDbRepository()
 });
 
-export const handleUsersCRUD = createApiRequestHandler({
-    GET: async (req, res: NextApiResponse<User[]>) => {
-        const users = await usersService.getAllUsers();
+export type GetUsersResponse = {
+    users: User[];
+    usersCount: number;
+}
 
-        return res.status(200).json(users);
+export const handleUsersCRUD = createApiRequestHandler({
+    GET: async (req, res: NextApiResponse<GetUsersResponse>) => {
+        const count = req.query.count ? Number(req.query.count) : undefined;
+        const page = req.query.page ? Number(req.query.page) : undefined;
+
+        const usersCount = await usersService.countUsers();
+        const users = await usersService.getUsers(count, page);
+
+        return res.status(200).json({users, usersCount});
     }
 });

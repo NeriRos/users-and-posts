@@ -8,6 +8,7 @@ export type TableProps = {
     rows: ReactNode[],
     isLoading?: boolean,
     headers: { props?: any, content: ReactNode }[],
+    pagination?: ReactNode
 }
 
 export const Table = (props: TableProps) => {
@@ -31,6 +32,15 @@ export const Table = (props: TableProps) => {
                         <td colSpan={columnsCount}>{TEXTS.loadingText}</td>
                     </tr>}
                 </tbody>
+                <tfoot>
+                <tr>
+                    <td colSpan={columnsCount}>
+                        <div className={Styles.pagination}>
+                            {props.pagination}
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
             </table>
         </div>
     )

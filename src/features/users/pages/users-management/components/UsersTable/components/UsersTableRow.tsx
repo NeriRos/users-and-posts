@@ -8,7 +8,7 @@ export const UsersTableRow = ({user}: { user: User }) => {
     const {selectUser} = useUsersTable();
 
     return (
-        <tr>
+        <tr className={user.id + ""}>
             <td>{user.name}</td>
             <td>{user.email}</td>
             <td className={Styles.addressColumn}><AddressText address={user.address}/></td>

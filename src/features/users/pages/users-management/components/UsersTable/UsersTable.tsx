@@ -1,18 +1,22 @@
-import React, {useMemo} from "react";
+import React, {useEffect, useMemo, useRef} from "react";
 import {useUsersTable} from "@/features/users/pages/users-management/components/UsersTable/useUsersTable";
 import {User} from "@/features/users/models/User";
 import {UsersTableRow} from "@/features/users/pages/users-management/components/UsersTable/components/UsersTableRow";
 
 import Styles from './UsersTable.module.css';
 import {TEXTS} from "@/features/users/pages/users-management/components/UsersTable/texts";
-import {ColumnSort, Table} from "@/core/components/Table";
+import {ColumnSort, Pagination, Table} from "@/core/components/Table";
+import {useRouter} from "next/router";
+import {PAGINATION_PER_PAGE} from "@/core/components/Table/consts";
 
 export const UsersTable = () => {
-    const {users, isLoading, changeSortDirection} = useUsersTable();
+    const {users, usersCount, isLoading, changeSortDirection, paginate} = useUsersTable();
+
 
     return (
         <Table isLoading={isLoading}
                className={Styles.table}
+               pagination={<Pagination itemsCount={usersCount} onChange={paginate}/>}
                rows={users.map((user: User) => <UsersTableRow key={user.id} user={user}/>)}
                headers={[
                    {
