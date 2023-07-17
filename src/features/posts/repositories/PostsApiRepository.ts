@@ -21,7 +21,7 @@ export const createPostsApiRepository = (): PostsRepository => {
             }
         });
 
-        return apiPosts.map((apiPost: ApiPost) => convertApiPostToPost(apiPost)).sort((a, b) => a.title.localeCompare(b.title));
+        return apiPosts.map((apiPost: ApiPost) => convertApiPostToPost(apiPost));
     }
 
     return {

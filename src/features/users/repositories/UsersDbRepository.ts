@@ -28,11 +28,7 @@ export const createUsersDbRepository = (): UsersDbRepository => {
     }
 
     const getUsers = async (): Promise<User[]> => {
-        const dbUsers = await prisma.user.findMany({
-            orderBy: {
-                name: 'asc'
-            },
-        });
+        const dbUsers = await prisma.user.findMany();
 
         return dbUsers.map(dbUser => User.fromJson({
             id: dbUser.id,

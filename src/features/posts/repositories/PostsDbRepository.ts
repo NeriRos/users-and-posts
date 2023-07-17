@@ -28,9 +28,6 @@ export const createPostsDbRepository = (): PostsDbRepository => {
             where: {
                 authorId
             },
-            orderBy: {
-                title: 'desc',
-            },
             ...(paginate && {
                 skip: perPage * (paginate.page - 1),
                 take: perPage

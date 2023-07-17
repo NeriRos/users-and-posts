@@ -22,7 +22,7 @@ export const createUsersApiRepository = (): UsersRepository => {
     const getUsers = async (): Promise<User[]> => {
         const apiUsers: ApiUser[] = await restGetRequest(API_BASE_URL);
 
-        return apiUsers.map((apiUser: ApiUser) => convertApiUserToUser(apiUser)).sort((a, b) => a.name.localeCompare(b.name));
+        return apiUsers.map((apiUser: ApiUser) => convertApiUserToUser(apiUser));
     }
 
     const getUserById = async (userId: number): Promise<User | undefined> => {
