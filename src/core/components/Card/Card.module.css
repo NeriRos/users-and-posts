@@ -2,9 +2,10 @@
 .card {
     position: relative;
     padding: 1rem 1.2rem;
+    margin: 10px;
     border-radius: var(--border-radius);
-    background: rgba(var(--card-rgb), 0);
-    border: 1px solid rgba(var(--card-border-rgb), 0);
+    background: rgba(var(--card-rgb), 1);
+    border: 1px solid rgba(var(--card-border-rgb), 1);
     transition: background 200ms, border 200ms;
 }
 
@@ -20,7 +21,7 @@
 
 .card :global(p) {
     margin: 0;
-    opacity: 0.6;
+    opacity: 1;
     font-size: 0.9rem;
     line-height: 1.5;
     max-width: 30ch;
@@ -43,5 +44,5 @@
     justify-content: flex-end;
     align-items: center;
     width: 100%;
-    margin: 0.5rem;
+    margin: auto 0.5rem 0.5rem 0.5rem;
 }
