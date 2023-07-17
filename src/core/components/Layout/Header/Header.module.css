@@ -1,7 +1,7 @@
 .header {
     display: flex;
     justify-content: space-between;
-    height: 2rem;
+    height: 3rem;
     padding: 1rem;
     background: rgb(var(--callout-rgb));
     border-bottom: 1px solid rgb(var(--callout-border-rgb));
@@ -14,7 +14,11 @@
 
 .link {
     margin-right: 1rem;
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 500;
     text-shadow: var(--secondary-glow);
+}
+
+.link.active {
+    font-weight: 700;
 }
