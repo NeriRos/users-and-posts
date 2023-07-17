@@ -193,3 +193,11 @@ h1 {
         grid-template-columns: repeat(2, 50%);
     }
 }
+
+input {
+    border: 1px solid rgb(var(--card-border-rgb));
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    width: 100%;
+    background-color: rgb(var(--background-end-rgb));
+}

@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef} from "react";
+import React from "react";
 import {useUsersTable} from "@/features/users/pages/users-management/components/UsersTable/useUsersTable";
 import {User} from "@/features/users/models/User";
 import {UsersTableRow} from "@/features/users/pages/users-management/components/UsersTable/components/UsersTableRow";
@@ -6,8 +6,6 @@ import {UsersTableRow} from "@/features/users/pages/users-management/components/
 import Styles from './UsersTable.module.css';
 import {TEXTS} from "@/features/users/pages/users-management/components/UsersTable/texts";
 import {ColumnSort, Pagination, Table} from "@/core/components/Table";
-import {useRouter} from "next/router";
-import {PAGINATION_PER_PAGE} from "@/core/components/Table/consts";
 
 export const UsersTable = () => {
     const {users, usersCount, isLoading, changeSortDirection, paginate} = useUsersTable();

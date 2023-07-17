@@ -22,7 +22,7 @@ export const createPostsDbRepository = (): PostsDbRepository => {
         page: number,
         perPage: number
     }): Promise<Post[]> => {
-        const perPage = paginate?.perPage || 10;
+        const perPage = paginate?.perPage || 100;
 
         const dbPosts = await prisma.post.findMany({
             where: {

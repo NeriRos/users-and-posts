@@ -3,7 +3,7 @@ import {UsersService} from "@/features/users/services/UsersService";
 import {createUsersApiRepository} from "@/features/users/repositories/UsersApiRepository";
 import {createUsersDbRepository} from "@/features/users/repositories/UsersDbRepository";
 import {User} from "@/features/users/models/User";
-import {createApiRequestHandler, MethodToHandlerMapType} from "@/core/api/apiRequestHandler";
+import {createApiRequestHandler} from "@/core/api/apiRequestHandler";
 
 const usersService = UsersService({
     apiRepository: createUsersApiRepository(),
