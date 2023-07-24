@@ -3,8 +3,8 @@
 # Start docker
 docker-compose up -d
 
-# Push the prisma schema to the database
-npx prisma db push
+# Db init
+/bin/bash ./prisma/init_db.sh
 
 # Install dependencies
 npx pnpm i
