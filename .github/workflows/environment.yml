@@ -11,9 +11,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - shell: bash
+      - name: Find and Replace Database URL
+        uses: jacobtomlinson/gha-find-replace@v3
         with:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: |
-          echo "Replacing DATABASE_URL with secret"
-          sed -i.bak "s|^DATABASE_URL=.*|DATABASE_URL=${{ secrets.DATABASE_URL }}|" .env && rm .env.bak
+          files: .env
+          find: "DATABASE_URL=.*"
+          replace: "DATABASE_URL=${{ secrets.DATABASE_URL }}"
