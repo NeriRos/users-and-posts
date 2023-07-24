@@ -11,12 +11,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Find DATABASE_URL
-        run: |
-          DATABASE_URL=$(grep DATABASE_URL .env)
-          echo "Found DATABASE_URL: $DATABASE_URL"
       - name: Replace DATABASE_URL
         run: |
-          REPLICA=$(echo "${{ secrets.DATABASE_URL }}")
           echo "Replacing DATABASE_URL with secret"
-          sed -i "s/$DATABASE_URL/$REPLICA/$" .env
+          sed -i.bak 's/^DATABASE_URL=.*/DATABASE_URL=${{ secrets.DATABASE_URL }}/' .env && rm .env.bak
