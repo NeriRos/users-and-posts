@@ -1,0 +1,20 @@
+name: Create Env File With Secrets
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  find-and-replace-database-url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find DATABASE_URL
+        run: |
+          DATABASE_URL=$(grep DATABASE_URL .env)
+          echo "Found DATABASE_URL: $DATABASE_URL"
+      - name: Replace DATABASE_URL
+        run: |
+          REPLICA=$(echo "${{ secrets.DATABASE_URL }}")
+          echo "Replacing DATABASE_URL with secret"
+          sed -i "s/$DATABASE_URL/$REPLICA/$" .env
