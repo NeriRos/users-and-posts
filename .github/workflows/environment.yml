@@ -12,8 +12,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - shell: bash
-        env:
+        with:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           echo "Replacing DATABASE_URL with secret"
-          sed -i.bak 's|^DATABASE_URL=.*|DATABASE_URL=$DATABASE_URL|' .env && rm .env.bak
+          sed -i.bak "s|^DATABASE_URL=.*|DATABASE_URL=${{ secrets.DATABASE_URL }}|" .env && rm .env.bak
