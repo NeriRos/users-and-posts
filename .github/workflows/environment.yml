@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  find-and-replace-database-url:
+  populate-env-file:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -14,6 +14,3 @@ jobs:
       - name: Set env database url
         run: |
           sed -i.bak "s|^DATABASE_URL=.*$|DATABASE_URL=${{ secrets.DATABASE_URL }}|g" .env
-      - name: test
-        run: |
-          cat .env
