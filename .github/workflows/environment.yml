@@ -15,4 +15,4 @@ jobs:
         run: |
           echo "Replacing DATABASE_URL with secret"
           sed -i.bak 's|^DATABASE_URL=.*|DATABASE_URL=${{ secrets.DATABASE_URL }}|' .env
-          echo .env && rm .env.bak
+          cat .env && rm .env.bak
