@@ -15,7 +15,7 @@ export const useUsersTable = () => {
 
     const {error, data, isLoading} = useQuery<GetUsersResponse>({
         queryKey: ['users', count, page], queryFn: getUsers(count, page),
-        initialData: {users: [], usersCount: 0},
+        initialData: {users: [], usersCount: 0, test: {}},
     });
     const [sort, setSort] = useState<{ [key: string]: string }>({})
 
