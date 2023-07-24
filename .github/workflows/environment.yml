@@ -9,6 +9,11 @@ jobs:
   find-and-replace-database-url:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug grep error
+        run: |
+          echo "Current working directory: $(pwd)"
+          echo "List of files in current directory: $(ls)"
+          echo "Permissions of .env file: $(stat -c %a .env)"
       - name: Find DATABASE_URL
         run: |
           DATABASE_URL=$(grep DATABASE_URL .env)
