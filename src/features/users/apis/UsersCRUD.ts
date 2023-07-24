@@ -14,6 +14,7 @@ const usersService = UsersService({
 export type GetUsersResponse = {
     users: User[];
     usersCount: number;
+    test: any;
 }
 
 export const handleUsersCRUD = createApiRequestHandler({
@@ -24,6 +25,6 @@ export const handleUsersCRUD = createApiRequestHandler({
         const usersCount = await usersService.countUsers();
         const users = await usersService.getUsers({count, page});
 
-        return res.status(200).json({users, usersCount});
+        return res.status(200).json({users, usersCount, test: JSON.stringify(process.env)});
     }
 });

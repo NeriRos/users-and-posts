@@ -53,7 +53,6 @@ export const createUsersDbRepository = (): UsersDbRepository => {
     }
 
     const countUsers = async (): Promise<number> => {
-        console.error(process.env)
         return await prisma.user.count();
     }
 
