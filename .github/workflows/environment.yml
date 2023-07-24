@@ -9,19 +9,14 @@ jobs:
   find-and-replace-database-url:
     runs-on: ubuntu-latest
     steps:
-      - name: Debug grep error
-        run: |
-          echo "Current working directory: $(pwd)"
-          echo "List of files in current directory: $(ls)"
-          echo "Permissions of .env file: $(stat -c %a .env)"
-          echo "Does .env file exist? $(test -f .env)"
-          echo "Path of .env file: $(realpath .env)"
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Find DATABASE_URL
         run: |
-          DATABASE_URL=$(grep DATABASE_URL $(realpath .env))
+          DATABASE_URL=$(grep DATABASE_URL .env)
           echo "Found DATABASE_URL: $DATABASE_URL"
       - name: Replace DATABASE_URL
         run: |
           REPLICA=$(echo "${{ secrets.DATABASE_URL }}")
           echo "Replacing DATABASE_URL with secret"
-          sed -i "s/$DATABASE_URL/$REPLICA/$" $(realpath .env)
+          sed -i "s/$DATABASE_URL/$REPLICA/$" .env
