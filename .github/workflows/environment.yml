@@ -18,10 +18,10 @@ jobs:
           echo "Path of .env file: $(realpath .env)"
       - name: Find DATABASE_URL
         run: |
-          DATABASE_URL=$(grep DATABASE_URL .env)
+          DATABASE_URL=$(grep DATABASE_URL $(realpath .env))
           echo "Found DATABASE_URL: $DATABASE_URL"
       - name: Replace DATABASE_URL
         run: |
           REPLICA=$(echo "${{ secrets.DATABASE_URL }}")
           echo "Replacing DATABASE_URL with secret"
-          sed -i "s/$DATABASE_URL/$REPLICA/$" .env
+          sed -i "s/$DATABASE_URL/$REPLICA/$" $(realpath .env)
