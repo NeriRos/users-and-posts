@@ -14,6 +14,8 @@ jobs:
           echo "Current working directory: $(pwd)"
           echo "List of files in current directory: $(ls)"
           echo "Permissions of .env file: $(stat -c %a .env)"
+          echo "Does .env file exist? $(test -f .env)"
+          echo "Path of .env file: $(realpath .env)"
       - name: Find DATABASE_URL
         run: |
           DATABASE_URL=$(grep DATABASE_URL .env)
