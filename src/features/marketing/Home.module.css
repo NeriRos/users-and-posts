@@ -82,7 +82,7 @@
     margin-top: 1rem;
 }
 
-.content h4 {
+.content p:has(strong) {
     margin-bottom: 0.2rem;
     margin-top: 1rem;
 }
